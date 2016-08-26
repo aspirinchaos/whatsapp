@@ -15,7 +15,7 @@ export default class ProfileCtrl extends Controller {
             if (err) return this.handleError(err);
 
             this.$ionicLoading.show({
-                template: 'Updating picture...'
+                template: 'Обновление изображения...'
             });
 
             this.callMethod('updatePicture', data, (err) => {
@@ -46,4 +46,4 @@ export default class ProfileCtrl extends Controller {
     }
 }
 
-ProfileCtrl.$inject = ['$state', '$ionicPopup', '$log'];
+ProfileCtrl.$inject = ['$state', '$ionicPopup', '$log','$ionicLoading'];
