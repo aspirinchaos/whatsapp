@@ -9,7 +9,7 @@ import Loader from 'angular-ecmascript/module-loader';
 import { Meteor } from 'meteor/meteor';
 
 // Modules
-import RoutesConfig from '../routes';
+import RoutesConfig from './routes';
 
 const App = 'Whatsapp';
 
