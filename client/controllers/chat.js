@@ -1,8 +1,9 @@
 import Ionic from 'ionic-scripts';
-import { _ } from 'meteor/underscore';
-import { Meteor } from 'meteor/meteor';
-import { Controller } from 'angular-ecmascript/module-helpers';
-import { Chats, Messages } from '../../lib/collections';
+import {_} from 'meteor/underscore';
+import {Meteor} from 'meteor/meteor';
+import {MeteorCameraUI} from 'meteor/okland:camera-ui';
+import {Controller} from 'angular-ecmascript/module-helpers';
+import {Chats, Messages} from '../../lib/collections';
 
 export default class ChatCtrl extends Controller {
     constructor() {
@@ -14,7 +15,7 @@ export default class ChatCtrl extends Controller {
 
         this.helpers({
             messages() {
-                return Messages.find({ chatId: this.chatId });
+                return Messages.find({chatId: this.chatId});
             },
             data() {
                 return Chats.findOne(this.chatId);
@@ -22,6 +23,29 @@ export default class ChatCtrl extends Controller {
         });
 
         this.autoScroll();
+    }
+
+    sendPicture() {
+        MeteorCameraUI.getPicture({}, (err, data) => {
+            if (err) return this.handleError(err);
+
+            this.callMethod('newMessage', {
+                picture: data,
+                type: 'picture',
+                chatId: this.chatId
+            });
+        });
+    }
+
+    handleError(err) {
+        if (err.error == 'cancel') return;
+        this.$log.error('Profile save error ', err);
+
+        this.$ionicPopup.alert({
+            title: err.reason || 'Не удалось отправить',
+            template: 'Попробуйте еще раз',
+            okType: 'button-positive button-clear'
+        });
     }
 
     sendMessage() {
@@ -36,7 +60,7 @@ export default class ChatCtrl extends Controller {
         delete this.message;
     }
 
-    inputUp () {
+    inputUp() {
         if (this.isIOS) {
             this.keyboardHeight = 216;
         }
@@ -44,7 +68,7 @@ export default class ChatCtrl extends Controller {
         this.scrollBottom(true);
     }
 
-    inputDown () {
+    inputDown() {
         if (this.isIOS) {
             this.keyboardHeight = 0;
         }
@@ -52,7 +76,7 @@ export default class ChatCtrl extends Controller {
         this.$ionicScrollDelegate.$getByHandle('chatScroll').resize();
     }
 
-    closeKeyboard () {
+    closeKeyboard() {
         if (this.isCordova) {
             cordova.plugins.Keyboard.close();
         }
@@ -76,4 +100,4 @@ export default class ChatCtrl extends Controller {
     }
 }
 
-ChatCtrl.$inject = ['$stateParams', '$timeout', '$ionicScrollDelegate'];
+ChatCtrl.$inject = ['$stateParams', '$timeout', '$ionicScrollDelegate', '$ionicPopup', '$log'];
