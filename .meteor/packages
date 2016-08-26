@@ -23,3 +23,6 @@ angular-templates
 dab0mb:ionic-assets
 fourseven:scss
 check
+npm-bcrypt
+accounts-password
+kenlane22:accounts-phone@0.0.21
