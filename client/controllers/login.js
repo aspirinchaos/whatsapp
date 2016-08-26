@@ -1,0 +1,45 @@
+import { _ } from 'meteor/underscore';
+import { Accounts } from 'meteor/accounts-base';
+import { Controller } from 'angular-ecmascript/module-helpers';
+
+export default class LoginCtrl extends Controller {
+    login() {
+        if (_.isEmpty(this.phone)) return;
+
+        const confirmPopup = this.$ionicPopup.confirm({
+            title: 'Подтверждение номера',
+            template: '<div>' + this.phone + '</div><div>Это ваш номер?</div>',
+            cssClass: 'text-center',
+            okText: 'Да',
+            okType: 'button-positive button-clear',
+            cancelText: 'Нет',
+            cancelType: 'button-dark button-clear'
+        });
+
+        confirmPopup.then((res) => {
+            if (!res) return;
+
+            this.$ionicLoading.show({
+                template: 'Отправка кода подтверждения...'
+            });
+
+            Accounts.requestPhoneVerification(this.phone, (err) => {
+                this.$ionicLoading.hide();
+                if (err) return this.handleError(err);
+                this.$state.go('confirmation', { phone: this.phone });
+            });
+        });
+    }
+
+    handleError(err) {
+        this.$log.error('Login error ', err);
+
+        this.$ionicPopup.alert({
+            title: err.reason || 'Ошибка авторизации',
+            template: 'Пожалуйста попробуйте снова',
+            okType: 'button-positive button-clear'
+        });
+    }
+}
+
+LoginCtrl.$inject = ['$state', '$ionicLoading', '$ionicPopup', '$log'];
