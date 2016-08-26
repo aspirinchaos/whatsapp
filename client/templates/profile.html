@@ -1,0 +1,23 @@
+<ion-view title="Профиль">
+    <ion-nav-buttons side="right">
+        <button ng-click="profile.updateName()" ng-disabled="!profile.name || profile.name.length === 0" class="button button-clear button-positive">Готово</button>
+    </ion-nav-buttons>
+
+    <ion-content class="profile">
+        <a class="profile-picture positive">
+            <div class="upload-placehoder">
+                Добавить фото
+            </div>
+        </a>
+
+        <div class="instructions">
+            Введите ваше имя и добавьте фотографию
+        </div>
+
+        <div class="list profile-name">
+            <label class="item item-input">
+                <input ng-model="profile.name" on-return="profile.updateName()" type="text" placeholder="Ваше имя">
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

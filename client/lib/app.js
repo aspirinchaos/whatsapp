@@ -15,6 +15,7 @@ import ChatsCtrl from '../controllers/chats';
 import ChatCtrl from '../controllers/chat';
 import ConfirmationCtrl from '../controllers/confirmation';
 import LoginCtrl from '../controllers/login';
+import ProfileCtrl from '../controllers/profile';
 import InputDirective from '../directives/input';
 import CalendarFilter from '../filters/calendar';
 import Routes from './routes';
@@ -34,6 +35,7 @@ new Loader(App)
     .load(ChatCtrl)
     .load(ConfirmationCtrl)
     .load(LoginCtrl)
+    .load(ProfileCtrl)
     .load(InputDirective)
     .load(CalendarFilter)
     .load(Routes);
