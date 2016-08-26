@@ -15,10 +15,12 @@ import ChatsCtrl from '../controllers/chats';
 import ChatCtrl from '../controllers/chat';
 import ConfirmationCtrl from '../controllers/confirmation';
 import LoginCtrl from '../controllers/login';
+import NewChatCtrl from '../controllers/new-chat';
 import ProfileCtrl from '../controllers/profile';
 import SettingsCtrl from '../controllers/settings';
 import InputDirective from '../directives/input';
 import CalendarFilter from '../filters/calendar';
+import NewChatService from '../services/new-chat';
 import Routes from './routes';
 
 const App = 'Whatsapp';
@@ -36,10 +38,12 @@ new Loader(App)
     .load(ChatCtrl)
     .load(ConfirmationCtrl)
     .load(LoginCtrl)
+    .load(NewChatCtrl)
     .load(ProfileCtrl)
     .load(SettingsCtrl)
     .load(InputDirective)
     .load(CalendarFilter)
+    .load(NewChatService)
     .load(Routes);
 
 // Startup
