@@ -16,7 +16,7 @@ import ChatCtrl from '../controllers/chat';
 import LoginCtrl from '../controllers/login';
 import InputDirective from '../directives/input';
 import CalendarFilter from '../filters/calendar';
-import RoutesConfig from './routes';
+import Routes from './routes';
 
 const App = 'Whatsapp';
 
@@ -34,7 +34,7 @@ new Loader(App)
     .load(LoginCtrl)
     .load(InputDirective)
     .load(CalendarFilter)
-    .load(RoutesConfig);
+    .load(Routes);
 
 // Startup
 if (Meteor.isCordova) {
