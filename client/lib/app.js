@@ -20,7 +20,8 @@ import ProfileCtrl from '../controllers/profile';
 import SettingsCtrl from '../controllers/settings';
 import InputDirective from '../directives/input';
 import CalendarFilter from '../filters/calendar';
-import ChatNameFilter from '../filters/chat-name'
+import ChatNameFilter from '../filters/chat-name';
+import ChatPictureFilter from '../filters/chat-picrute';
 import NewChatService from '../services/new-chat';
 import Routes from './routes';
 
@@ -45,6 +46,7 @@ new Loader(App)
     .load(InputDirective)
     .load(CalendarFilter)
     .load(ChatNameFilter)
+    .load(ChatPictureFilter)
     .load(NewChatService)
     .load(Routes);
 
