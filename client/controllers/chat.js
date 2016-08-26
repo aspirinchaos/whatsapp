@@ -2,7 +2,7 @@ import Ionic from 'ionic-scripts';
 import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 import { Controller } from 'angular-ecmascript/module-helpers';
-import { Chats } from '../../lib/collections';
+import { Chats, Messages } from '../../lib/collections';
 
 export default class ChatCtrl extends Controller {
     constructor() {
@@ -13,6 +13,9 @@ export default class ChatCtrl extends Controller {
         this.isCordova = Meteor.isCordova;
 
         this.helpers({
+            messages() {
+                return Messages.find({ chatId: this.chatId });
+            },
             data() {
                 return Chats.findOne(this.chatId);
             }
